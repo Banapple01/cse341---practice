@@ -7,7 +7,7 @@ const Todo = require('../models/todo')
 // @desc    Login/Landing Page
 // @route   GET /
 router.get('/', ensureGuest, (req, res) => {
-    res.render('Login', {
+    res.render('login', {
         layout: 'login'
     })
 })
