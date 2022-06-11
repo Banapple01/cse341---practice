@@ -24,6 +24,13 @@ const app = express()
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
+app.use(bodyParser.json())
+	.use((req, res, next) => {
+		res.setHeader("Access-Control-Allow-Origin", "*");
+		next();
+	})
+	.use("/", require("./routes"));
+
 // MethodOverride
 app.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
