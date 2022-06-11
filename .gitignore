@@ -4,6 +4,7 @@ config\config.env
 .env
 .vscode
 config.env
+cse341 - practice\config\config.env
 
 # Logs
 logs
