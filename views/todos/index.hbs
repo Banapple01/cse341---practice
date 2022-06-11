@@ -1,0 +1,28 @@
+<h1>Todos</h1>
+<div class="row">
+    {{#each todos}}
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    {{{editIcon user ../user _id}}}
+                </div>
+                <div class="card-content center-align">
+                    <h5>{{todoTitle}}</h5>
+                    <p>{{stripTags (truncate todoDesc 150)}}</p>
+                    <br>
+                    <div class="chip">
+                        <img src="{{user.image}}" alt="">
+                        <a href="/todo_m/user/{{user._id}}">{{user.displayName}}</a>
+                    </div>
+                </div>
+                <div class="card-action center-align">
+                    <a href="/todo_m/{{_id}}" class="btn grey">Look at more</a>
+                </div>
+            </div>
+        </div>
+    {{else}}
+        <p>No Todos to display</p>
+    {{/each}}
+</div>
+
+<a href="/todo_m/edit/${todo_id}"><i class="fas fa-edit"></i></a>

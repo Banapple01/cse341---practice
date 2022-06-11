@@ -1,0 +1,38 @@
+<h3>Add Todo</h3>
+<div class="row">
+    <form action="/todo_m/{{todo._id}}" method="POST" class="col s12">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="row">
+            <div class="input-field">
+                <input type="text" name="todoTitle" id="title" value="{{todo.todoTitle}}">
+                <label for="todoTitle">Title</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <h5>Task Description</h5>
+                <textarea name="todoDesc" id="desc">{{todo.todoDesc}}</textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <select name="status" id="status">
+                    {{#select todo.status}}
+                        <option value="public" selected>Public</option>
+                        <option value="private">Private</option>
+                    {{/select}}
+                </select>
+                <label for="status">Status</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <input type="submit" value="Save" class="btn">
+                <a href="/dashboard" class="btn orange">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
