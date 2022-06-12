@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { ensureAuth} = require('../middleware/auth')
+const { ensureAuth } = require('../middleware/auth')
 
 const Todo = require('../models/todo')
 
@@ -145,4 +145,4 @@ router.get('/user/:userId', ensureAuth, async (req, res) => {
     }
 })
 
-module.exports = router
+module.exports = router;

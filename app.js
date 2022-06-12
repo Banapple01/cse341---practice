@@ -1,5 +1,6 @@
 const path = require('path')
 const express = require('express')
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
@@ -9,6 +10,10 @@ const passport = require('passport')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const connectDB = require('./config/db')
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+const MongoClient = require('mongodb').MongoClient;
+const mongodb = require('./config/connect');
 
 // Load config
 dotenv.config({path: './config/config.env'})
@@ -24,12 +29,12 @@ const app = express()
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-// app.use(bodyParser.json())
-// 	.use((req, res, next) => {
-// 		res.setHeader("Access-Control-Allow-Origin", "*");
-// 		next();
-// 	})
-// 	.use("/", require("./routes"));
+app.use(bodyParser.json())
+	.use((req, res, next) => {
+		res.setHeader("Access-Control-Allow-Origin", "*");
+		next();
+	})
+	.use("/", require("./routes"));
 
 // MethodOverride
 app.use(methodOverride(function (req, res) {
@@ -83,7 +88,17 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
 app.use('/todo_m', require('./routes/todos'))
+app.use('/swagger', require('./routes/swagger'));
 
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, console.log(`server running in ${process.env.NODE_ENV} mode on port ${PORT}`))
+
+mongodb.initDb((err, mongodb) => {
+    if (err) {
+        console.log(err);
+    } else {
+        // app.listen(PORT);
+        console.log(`Connected to DB and listening on ${PORT}`);
+    }
+});

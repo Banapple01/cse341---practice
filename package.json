@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node app",
-    "dev": "cross-env NODE_ENV=development nodemon app"
+    "dev": "cross-env NODE_ENV=development nodemon app",
+    "swagger": "cross-env NODE_ENV=development node ./swagger.js"
   },
   "author": "Jonathan Wright",
   "license": "MIT",
